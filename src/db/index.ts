@@ -11,7 +11,6 @@ const { url, options } = (database as any)[env]
 
 const sequelize = new Sequelize(url, options)
 
-console.log(url)
 
 sequelize.authenticate()
     .then(()=> console.log('Database connection has been established succesfully'))
