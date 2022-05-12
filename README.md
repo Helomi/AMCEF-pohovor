@@ -6,3 +6,4 @@
 - 50 min. Predvytvorenie endpointov, Vytvorenie validačného middleware
 - 4 hod. Gettter todoitem, todoitems, todolist, todolists, Post todolist, passport implementácia JWT, Login
 - 1 hod. Dokončenie delete, patch, menšia úprava modelov, úprava už navrhnutých endpointov
+- 80 min. 

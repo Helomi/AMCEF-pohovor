@@ -9,7 +9,7 @@ export const schema = Joi.object( {
     }),
     query: Joi.object(),
     params: Joi.object({
-        todolistID: Joi.number().integer().min(1).required()
+        todoListID: Joi.number().integer().min(1).required()
     })
 })
 
@@ -17,7 +17,7 @@ export const schema = Joi.object( {
 export const workflow = async (req: Request, res: Response) => {
     const {TodoList} = models
     const {body, params} = req
-    const id: number = Number(params.todolistID)
+    const id: number = Number(params.todoListID)
 
 
     await TodoList.update(body, {

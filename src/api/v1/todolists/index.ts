@@ -11,23 +11,25 @@ import passport from "passport";
 const router = Router()
 
 export default () => {
-    router.use('/:todolistID/items/', TodoItemRouter())
+    router.use('/:todoListID/todoItems/', TodoItemRouter())
+
     router.get('/',
         validationMiddleware(GetTodoLists.schema),
         GetTodoLists.workflow)
-    router.get('/:todolistID',
+    router.get('/:todoListID',
         validationMiddleware(GetTodoList.schema),
         GetTodoList.workflow)
     router.post('/',
         passport.authenticate('jwt-api'),
         validationMiddleware(PostTodoList.schema),
         PostTodoList.workflow)
-    router.patch('/:todolistID',
+    router.patch('/:todoListID',
         validationMiddleware(PatchTodoList.schema),
         PatchTodoList.workflow)
-    router.delete('/:todolistID',
+    router.delete('/:todoListID',
         validationMiddleware(DeleteTodoList.schema),
         DeleteTodoList.workflow)
 
     return router
 }
+

@@ -7,13 +7,15 @@ import {size} from "lodash";
 export const schema = Joi.object( {
     body: Joi.object(),
     query: Joi.object(),
-    params: Joi.object()
+    params: Joi.object({
+        todoListID: Joi.number().integer().min(1).required()
+    })
 })
 
 export const workflow = async (req: Request, res: Response) => {
     const {TodoItem, TodoList} = models
     const {params} = req
-    const todoListID: number = Number(params.todolistID)
+    const todoListID: number = Number(params.todoListID)
 
     const todoList = await TodoList.findOne({
         where: {
