@@ -47,6 +47,7 @@ export default (sequelize: Sequelize, modelName: string) => {
 
     (UserModel as any).associate = (models: Models) => {
         UserModel.hasMany(models.UserList)
+        UserModel.hasMany(models.TodoItem)
         UserModel.belongsToMany(models.TodoList, {through: models.UserList})
     }
 

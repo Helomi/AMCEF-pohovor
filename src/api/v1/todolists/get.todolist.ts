@@ -7,7 +7,7 @@ export const schema = Joi.object( {
     body: Joi.object(),
     query: Joi.object(),
     params: Joi.object({
-        todolistID: Joi.number().integer().required().min(1)
+        todolistID: Joi.number().integer().min(1).required()
     })
 })
 
@@ -17,6 +17,7 @@ export const workflow = async (req: Request, res: Response) => {
     const id: number = Number(params.todolistID)
 
     const todoList = await TodoList.findOne({
+        logging: true,
         where: {
             id: id
         },

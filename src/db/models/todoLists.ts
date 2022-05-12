@@ -36,11 +36,7 @@ export default (sequelize: Sequelize, modelName: string) => {
         });
 
     (TodoListModel as any).associate = (models: Models) => {
-        TodoListModel.belongsToMany(models.User, {through: models.UserList,
-            as: {
-                singular: 'user',
-                plural: 'users'
-            }})
+        TodoListModel.belongsToMany(models.User, {through: models.UserList})
         TodoListModel.hasMany(models.UserList)
         TodoListModel.hasMany(models.TodoItem, {foreignKey: 'todolist_id'})
     }

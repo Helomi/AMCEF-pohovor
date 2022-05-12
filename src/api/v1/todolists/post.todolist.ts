@@ -18,6 +18,7 @@ export const workflow = async (req: Request, res: Response) => {
     const {User, TodoList} = models
     const user: UserModel = await User.findByPk(userID)
     await TodoList.create(req.body).then(function (newTodoList){
+        // @ts-ignore Metóda existuje ale keďže nie je statická ale vytvorená dynamicky tak ju webstorm nepozná.
         user.addTodoList(newTodoList)
         res.status(200).json({
             messages: [{
