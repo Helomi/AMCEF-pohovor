@@ -8,3 +8,4 @@
 - 1 hod. Dokončenie delete, patch, menšia úprava modelov, úprava už navrhnutých endpointov
 - 80 min. Dokončenie delete, patch, post pre todoItems, Doplnenie kontroli vstupných parametrov, zjednotenie názvov
 - 20 min. Dokončenie pridávania uživateľov do zoznamov
+- 15 min. Doplnenie registrácie, Oprava modelu (username, email unique)

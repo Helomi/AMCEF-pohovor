@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import * as Login from './post.login'
+import * as PostLogin from './post.login'
+import * as PostRegister from './post.register'
 import validationMiddleware from "../../../middlewares/validationMiddleware";
 import loginMiddleware from "../../../middlewares/loginMiddleware";
 
@@ -7,9 +8,12 @@ const router = Router()
 
 export default () => {
     router.post('/login',
-        validationMiddleware(Login.schema),
+        validationMiddleware(PostLogin.schema),
         loginMiddleware(),
-        Login.workflow)
+        PostLogin.workflow)
+    router.post('/register',
+        validationMiddleware(PostRegister.schema),
+        PostRegister.workflow)
 
     return router
 }

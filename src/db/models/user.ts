@@ -26,6 +26,7 @@ export default (sequelize: Sequelize, modelName: string) => {
             },
             username: {
                 type: DataTypes.STRING,
+                unique: true,
                 allowNull: false
             },
             password: {
@@ -34,6 +35,7 @@ export default (sequelize: Sequelize, modelName: string) => {
             },
             email: {
                 type: DataTypes.STRING,
+                unique: true,
                 allowNull: false
             }
         },
