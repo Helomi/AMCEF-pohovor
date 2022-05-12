@@ -13,7 +13,7 @@ export default (sequelize: Sequelize, modelName: string) => {
             timestamps: false,
             sequelize,
             modelName,
-            tableName: 'userslists'
+            tableName: 'usersLists'
         });
 
     (UsersListsModel as any).associate = (models: Models) => {

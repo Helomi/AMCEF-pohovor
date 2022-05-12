@@ -13,30 +13,30 @@ export const schema = Joi.object( {
     }),
     query: Joi.object(),
     params: Joi.object({
-        todoListID: Joi.number().integer().min(1).required(),
-        todoItemID: Joi.number().integer().min(1).required()
+        todoListId: Joi.number().integer().min(1).required(),
+        todoItemId: Joi.number().integer().min(1).required()
     })
 })
 
 export const workflow = async (req: Request, res: Response) => {
     const {TodoItem, User, UserList} = models
     const {params, body} = req
-    const todoListID:number = Number(params.todoListID)
-    const todoItemID:number = Number(params.todoItemID)
+    const todoListId:number = Number(params.todoListId)
+    const todoItemId:number = Number(params.todoItemId)
     const usr = req.user as any
-    const userID:number = usr.id
-    body.user_id = userID
-    body.todolist_id = todoListID
+    const userId:number = usr.id
+    body.userId = userId
+    body.todoListId = todoListId
 
     const userVerification = await User.findOne({
         include: {
             model: UserList,
             where: {
-                todoListId: todoListID
+                todoListId: todoListId
             }
         },
         where: {
-            id: userID
+            id: userId
         }
     })
 
@@ -51,15 +51,15 @@ export const workflow = async (req: Request, res: Response) => {
 
     const itemToUpdate = await TodoItem.findOne({
         where:  {
-            id: todoItemID,
-            todolist_id: todoListID
+            id: todoItemId,
+            todoListId: todoListId
         }
     })
 
     if (!itemToUpdate) {
         return res.status(404).json({
             type: "FAILURE",
-            message: `Item with ID ${todoItemID} was not found in list with ID ${todoListID}`
+            message: `Item with ID ${todoItemId} was not found in list with ID ${todoListId}`
         })
     }
 

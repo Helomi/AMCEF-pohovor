@@ -16,14 +16,14 @@ export const workflow = async (req: Request, res: Response) => {
     const {UserList} = models
     const {params} = req
     const usr = req.user as any
-    const userID:number = usr.id
-    const todoListID:number = Number(params.todoListId)
+    const userId:number = usr.id
+    const todoListId:number = Number(params.todoListId)
     const newUser:number = Number(params.userId)
 
     const validateUser = await UserList.findOne({
         where: {
-            userId: userID,
-            todoListId: todoListID
+            userId: userId,
+            todoListId: todoListId
         }
     })
     if (!validateUser) {
@@ -35,11 +35,11 @@ export const workflow = async (req: Request, res: Response) => {
 
     await UserList.create({
         userId: newUser,
-        todoListId: todoListID
+        todoListId: todoListId
     }).then(function (){
         res.status(200).json({
             type: "SUCCESS",
-            message: `User with ID ${newUser} was successfully added to list with ID ${todoListID}`
+            message: `User with ID ${newUser} was successfully added to list with ID ${todoListId}`
         })
     }).catch(function (e){
         res.status(500).json({

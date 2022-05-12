@@ -23,7 +23,7 @@ export const workflow= async(req: Request, res: Response) => {
     const limit: number = Number(query.limit)
     const page: number = Number(query.page)
 
-    const todolists: TodoListModel[] = await TodoList.findAll({
+    const todoLists: TodoListModel[] = await TodoList.findAll({
         offset: (page - 1) * limit,
         limit: limit,
         order: [
@@ -37,5 +37,5 @@ export const workflow= async(req: Request, res: Response) => {
         }]
     })
 
-    res.status(200).json(todolists)
+    res.status(200).json(todoLists)
 }

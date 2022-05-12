@@ -14,9 +14,9 @@ export const schema = Joi.object( {
 
 export const workflow = async (req: Request, res: Response) => {
     const usr = req.user as any
-    const userID:number = usr.id
+    const userId:number = usr.id
     const {User, TodoList} = models
-    const user: UserModel = await User.findByPk(userID)
+    const user: UserModel = await User.findByPk(userId)
     await TodoList.create(req.body).then(function (newTodoList){
         // @ts-ignore Metóda existuje ale keďže nie je statická ale vytvorená dynamicky tak ju webstorm nepozná.
         user.addTodoList(newTodoList)

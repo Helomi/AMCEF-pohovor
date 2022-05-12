@@ -9,7 +9,7 @@ export class UserModel extends Model {
     password: string
     email: string
 
-    todoLists: TodoListModel
+    todoLists: TodoListModel[]
     verifyPassword: (password: string) => Promise<boolean>;
 
 
@@ -49,7 +49,7 @@ export default (sequelize: Sequelize, modelName: string) => {
 
     (UserModel as any).associate = (models: Models) => {
         UserModel.hasMany(models.UserList)
-        UserModel.hasMany(models.TodoItem, {foreignKey: 'user_id'})
+        UserModel.hasMany(models.TodoItem, {foreignKey: 'userId'})
         UserModel.belongsToMany(models.TodoList, {through: models.UserList})
     }
 

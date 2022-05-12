@@ -8,18 +8,18 @@ export const schema = Joi.object( {
     body: Joi.object(),
     query: Joi.object(),
     params: Joi.object({
-        todoListID: Joi.number().integer().min(1).required()
+        todoListId: Joi.number().integer().min(1).required()
     })
 })
 
 export const workflow = async (req: Request, res: Response) => {
     const {TodoItem, TodoList} = models
     const {params} = req
-    const todoListID: number = Number(params.todoListID)
+    const todoListId: number = Number(params.todoListId)
 
     const todoList = await TodoList.findOne({
         where: {
-            id: todoListID
+            id: todoListId
         },
         include: [{
             model: TodoItem
@@ -28,7 +28,7 @@ export const workflow = async (req: Request, res: Response) => {
     if (!todoList) {
         return res.status(404).json({
             status: "Failure",
-            message: `TodoList with ID ${todoListID} not found`
+            message: `TodoList with ID ${todoListId} not found`
         })
     } else if (size(todoList.todoItems) === 0) {
         return res.status(204).json()

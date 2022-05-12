@@ -2,7 +2,7 @@ import {DataTypes, Model, Sequelize} from "sequelize";
 import {TODOITEM_STATUS, TODOITEM_STATUSES} from "../../utilities/enums";
 import {Models} from "../index";
 
-export class TodoItemsModel extends Model {
+export class TodoItemModel extends Model {
     id: number
     title: string
     text: string
@@ -11,12 +11,12 @@ export class TodoItemsModel extends Model {
 
 
     //FK
-    user_id: string
-    todolist_id: number
+    userId: number
+    todoListId: number
 }
 
 export default (sequelize: Sequelize, modelName: string) => {
-    TodoItemsModel.init({
+    TodoItemModel.init({
             id: {
                 type: DataTypes.BIGINT,
                 allowNull: false,
@@ -41,11 +41,11 @@ export default (sequelize: Sequelize, modelName: string) => {
             },
 
 
-            user_id: {
+            userId: {
                 type: DataTypes.BIGINT,
                 allowNull: false
             },
-            todolist_id: {
+            todoListId: {
                 type: DataTypes.BIGINT,
                 allowNull: false
             }
@@ -56,13 +56,13 @@ export default (sequelize: Sequelize, modelName: string) => {
             timestamps: false,
             sequelize,
             modelName,
-            tableName: 'todoitems'
+            tableName: 'todoItems'
         });
 
-    (TodoItemsModel as any).associate = (models: Models) => {
-        TodoItemsModel.belongsTo(models.TodoList, {foreignKey: 'todolist_id'})
-        TodoItemsModel.belongsTo(models.User, {foreignKey: 'user_id'})
+    (TodoItemModel as any).associate = (models: Models) => {
+        TodoItemModel.belongsTo(models.TodoList, {foreignKey: 'todoListId'})
+        TodoItemModel.belongsTo(models.User, {foreignKey: 'userId'})
     }
 
-    return TodoItemsModel
+    return TodoItemModel
 }

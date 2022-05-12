@@ -4,23 +4,18 @@ import {models} from "../../../db";
 
 
 export const schema = Joi.object( {
-    body: Joi.object({
-        title: Joi.string().min(8)
-    }),
+    body: Joi.object(),
     query: Joi.object(),
     params: Joi.object({
-        todoListID: Joi.number().integer().min(1).required()
+        todoListId: Joi.number().integer().min(1).required()
     })
 })
 
-
 export const workflow = async (req: Request, res: Response) => {
+    const {params} = req
+    const id: number = Number(params.todoListId)
     const {TodoList} = models
-    const {body, params} = req
-    const id: number = Number(params.todoListID)
-
-
-    await TodoList.update(body, {
+    await TodoList.destroy({
         where: {
             id: id
         }
@@ -28,7 +23,6 @@ export const workflow = async (req: Request, res: Response) => {
 
     res.status(200).json({
         type: "SUCCESS",
-        Message: "TodoList was successfully updated"
+        message: `TodoList with ID ${id} was successfully deleted`
     })
-
 }
