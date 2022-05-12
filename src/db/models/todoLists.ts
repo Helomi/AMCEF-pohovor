@@ -1,9 +1,15 @@
 import {DataTypes, Model, Sequelize} from "sequelize";
 import {Models} from "../index";
+import {UserModel} from "./user";
+import {TodoItemsModel} from "./todoItems";
 
 export class TodoListModel extends Model {
     id: number
     title: string
+
+    users: UserModel
+    todoItems: TodoItemsModel
+
 
 }
 
@@ -30,7 +36,11 @@ export default (sequelize: Sequelize, modelName: string) => {
         });
 
     (TodoListModel as any).associate = (models: Models) => {
-        TodoListModel.belongsToMany(models.User, {through: models.UserList})
+        TodoListModel.belongsToMany(models.User, {through: models.UserList,
+            as: {
+                singular: 'user',
+                plural: 'users'
+            }})
         TodoListModel.hasMany(models.UserList)
         TodoListModel.hasMany(models.TodoItem, {foreignKey: 'todolist_id'})
     }

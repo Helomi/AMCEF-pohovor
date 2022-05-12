@@ -1,11 +1,18 @@
 import {DataTypes, Model, Sequelize} from "sequelize";
 import {Models} from "../index";
+import {TodoListModel} from "./todoLists";
+import bcrypt from 'bcrypt';
 
 export class UserModel extends Model {
     id: number
     username: string
     password: string
     email: string
+
+    todoLists: TodoListModel
+    verifyPassword: (password: string) => Promise<boolean>;
+
+
 }
 
 export default (sequelize: Sequelize, modelName: string) => {
@@ -44,4 +51,10 @@ export default (sequelize: Sequelize, modelName: string) => {
     }
 
     return UserModel
+}
+
+UserModel.prototype.verifyPassword = async function (password) {
+    const user = this
+
+    return await bcrypt.compare(password, user.password)
 }

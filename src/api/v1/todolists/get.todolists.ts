@@ -1,20 +1,39 @@
 import Joi from "joi";
 import {Request, Response} from "express";
 import {models} from "../../../db";
-
+import {TodoListModel} from "../../../db/models/todoLists";
+import {ORDERS, GET_TODOLISTS_ORDERS} from "../../../utilities/enums";
 
 export const schema = Joi.object( {
     body: Joi.object(),
-    query: Joi.object(),
+    query: Joi.object({
+        limit: Joi.number().min(1).default(1),
+        orderBy: Joi.string().trim().valid(...GET_TODOLISTS_ORDERS).default('id'),
+        order: Joi.string().trim().valid(...ORDERS).default('asc'),
+        page: Joi.number().min(1).default(1)
+    }),
     params: Joi.object()
 })
 
 export const workflow= async(req: Request, res: Response) => {
-    const {TodoList, User} = models
+    const {TodoList, User, TodoItem} = models
     const {query} = req
-    const todolists = await TodoList.findAll({
+    const orderBy: string = query.orderBy as string
+    const order: string = query.order as string
+    const limit: number = Number(query.limit)
+    const page: number = Number(query.page)
+
+    const todolists: TodoListModel[] = await TodoList.findAll({
+        offset: (page - 1) * limit,
+        limit: limit,
+        order: [
+             [orderBy, order]
+        ],
         include: [{
             model: User
+        },
+        {
+            model: TodoItem
         }]
     })
 
