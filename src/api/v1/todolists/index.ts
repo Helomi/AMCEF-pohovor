@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import TodoItemRouter from './todoitem'
+import UserRouter from './user/index'
 import * as GetTodoLists from './get.todolists'
 import * as GetTodoList from './get.todolist'
 import * as PostTodoList from './post.todolist'
@@ -12,6 +13,7 @@ const router = Router()
 
 export default () => {
     router.use('/:todoListID/todoItems/', TodoItemRouter())
+    router.use('/:todoListId/user/', UserRouter())
 
     router.get('/',
         validationMiddleware(GetTodoLists.schema),
