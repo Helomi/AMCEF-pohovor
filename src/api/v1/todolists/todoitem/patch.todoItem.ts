@@ -19,33 +19,15 @@ export const schema = Joi.object( {
 })
 
 export const workflow = async (req: Request, res: Response) => {
-    const {TodoItem, User, UserList} = models
+    const {TodoItem} = models
     const {params, body} = req
     const todoListId:number = Number(params.todoListId)
     const todoItemId:number = Number(params.todoItemId)
     const usr = req.user as any
-    const userId:number = usr.id
-    body.userId = userId
+    body.userId = usr.id
     body.todoListId = todoListId
 
-    const userVerification = await User.findOne({
-        include: {
-            model: UserList,
-            where: {
-                todoListId: todoListId
-            }
-        },
-        where: {
-            id: userId
-        }
-    })
 
-    if (!userVerification) {
-        return res.status(403).json({
-            type: "FAILURE",
-            message: "Forbidden"
-        })
-    }
 
 
 

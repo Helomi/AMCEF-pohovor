@@ -5,20 +5,20 @@ import {Schema} from "joi";
 export default function validationMiddleware(schema: Schema) {
     return (req: Request, res: Response, next: NextFunction) => {
 
-        const { body, params, query} = req;
+        const { body, params, query} = req
 
-        const validationResult = schema.validate({body, params, query});
+        const validationResult = schema.validate({body, params, query})
 
         if (validationResult.error) {
-            return res.status(400).json(validationResult.error);
+            return res.status(400).json(validationResult.error)
         }
 
-        req.body = validationResult.value.body;
-        req.params = validationResult.value.params;
-        req.query = validationResult.value.query;
+        req.body = validationResult.value.body
+        req.params = validationResult.value.params
+        req.query = validationResult.value.query
 
 
-        return next();
+        return next()
 
     }
 }

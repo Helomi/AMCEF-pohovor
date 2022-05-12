@@ -1,6 +1,6 @@
 import {DataTypes, Model, Sequelize} from "sequelize";
 import {Models} from "../index";
-import {UserModel} from "./user";
+import {UserModel} from "./users";
 import {TodoItemModel} from "./todoItems";
 
 export class TodoListModel extends Model {

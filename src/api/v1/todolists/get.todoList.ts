@@ -17,12 +17,12 @@ export const workflow = async (req: Request, res: Response) => {
     const id: number = Number(params.todoListId)
 
     const todoList = await TodoList.findOne({
-        logging: true,
         where: {
             id: id
         },
         include: [{
             model: User,
+            attributes: ['id', 'username']
         },
         {
             model: TodoItem

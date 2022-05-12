@@ -10,7 +10,9 @@
 - 20 min. Dokončenie pridávania uživateľov do zoznamov
 - 15 min. Doplnenie registrácie, Oprava modelu (username, email unique)
 - 15 min. Doplnenie gettra na 1 používateľa a jemu priradené Listy a Itemy
-- XX min. Refactoring, zlúčenie názvov premenný,
+- 15 min. Refactoring, zlúčenie názvov premenných
+- XX min. Doplnenie autentifikácie
+- XX min. Refactoring, zkrášlenie kódu
 - XX min. Migrácie
 - XX min. Prejdenie si kódu a prípadná oprava chýb
 - 

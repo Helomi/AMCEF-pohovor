@@ -1,7 +1,7 @@
 import Joi from "joi";
 import {Request, Response} from "express";
 import {models} from "../../../db";
-import {UserModel} from "../../../db/models/user";
+import {UserModel} from "../../../db/models/users";
 
 
 export const schema = Joi.object( {

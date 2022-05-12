@@ -10,7 +10,8 @@ export const schema = Joi.object( {
         limit: Joi.number().min(1).default(1),
         orderBy: Joi.string().trim().valid(...GET_TODOLISTS_ORDERS).default('id'),
         order: Joi.string().trim().valid(...ORDERS).default('asc'),
-        page: Joi.number().min(1).default(1)
+        page: Joi.number().min(1).default(1),
+        token: Joi.string()
     }),
     params: Joi.object()
 })
@@ -30,7 +31,8 @@ export const workflow= async(req: Request, res: Response) => {
              [orderBy, order]
         ],
         include: [{
-            model: User
+            model: User,
+            attributes: ['id', 'username']
         },
         {
             model: TodoItem

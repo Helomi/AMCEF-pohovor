@@ -19,6 +19,11 @@ export const workflow = async (req: Request, res: Response) => {
     const todoItemId: number = Number(params.todoItemId)
     const todoListId: number = Number(params.todoListId)
 
+
+
+
+
+
     const todoItem = await TodoList.findAll({
         where: {
             id: todoListId

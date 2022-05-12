@@ -8,6 +8,7 @@ import * as PatchTodoList from './patch.todoList'
 import * as DeleteTodoList from './delete.todoList'
 import validationMiddleware from "../../../middlewares/validationMiddleware";
 import passport from "passport";
+import checkListOwnershipMiddleware from "../../../middlewares/checkListOwnershipMiddleware";
 
 const router = Router()
 
@@ -26,9 +27,13 @@ export default () => {
         validationMiddleware(PostTodoList.schema),
         PostTodoList.workflow)
     router.patch('/:todoListId',
+        passport.authenticate('jwt-api'),
+        checkListOwnershipMiddleware(),
         validationMiddleware(PatchTodoList.schema),
         PatchTodoList.workflow)
     router.delete('/:todoListId',
+        passport.authenticate('jwt-api'),
+        checkListOwnershipMiddleware(),
         validationMiddleware(DeleteTodoList.schema),
         DeleteTodoList.workflow)
 

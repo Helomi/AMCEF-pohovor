@@ -22,6 +22,11 @@ export const workflow = async (req: Request, res: Response) => {
             type: "SUCCESS",
             message: "Your registration was successful"
         })
+    }).catch(function (e){
+        res.status(500).json({
+            type: "FAILURE",
+            message: e.message
+        })
     })
 
 }

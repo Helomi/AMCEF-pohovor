@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize"
 import * as database from '../../config/database'
 import {forEach} from "lodash";
-import modelUser from './models/user'
+import modelUser from './models/users'
 import modelTodoItem from './models/todoItems'
 import modelTodoList from './models/todoLists'
 import modelUsersLists from './models/usersLists'

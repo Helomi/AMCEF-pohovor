@@ -21,7 +21,7 @@ export const workflow = async (req: Request, res: Response) => {
     const itemToRemove = await TodoItem.findOne({
         where: {
             id: todoItemId,
-            todolist_id: todoListId
+            todoListId: todoListId
         }
     })
     if (!itemToRemove) {
