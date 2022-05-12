@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "debug": "docker-compose up --detach postgres && cross-env NODE_ENV=development nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts'"
+    "debug-docker": "docker-compose up --detach postgres && cross-env NODE_ENV=development nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts'",
+    "prod-docker": "docker-compose up --detach postgres && cross-env NODE_ENV=production nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts'",
+    "debug": "cross-env NODE_ENV=development nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts'",
+    "prod": "cross-env NODE_ENV=production nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts'"
   },
   "keywords": [],
   "author": "",
