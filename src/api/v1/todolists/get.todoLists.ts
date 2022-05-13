@@ -39,5 +39,12 @@ export const workflow= async(req: Request, res: Response) => {
         }]
     })
 
-    res.status(200).json(todoLists)
+    res.status(200).json({
+        todoLists,
+        pagination: {
+            limit: limit,
+            page: page
+        }
+
+    })
 }
