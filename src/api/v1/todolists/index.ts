@@ -9,6 +9,7 @@ import * as DeleteTodoList from './delete.todoList'
 import validationMiddleware from "../../../middlewares/validationMiddleware";
 import passport from "passport";
 import checkListOwnershipMiddleware from "../../../middlewares/checkListOwnershipMiddleware";
+import errorMiddleware from "../../../middlewares/errorMiddleware";
 
 const router = Router()
 
@@ -18,24 +19,29 @@ export default () => {
 
     router.get('/',
         validationMiddleware(GetTodoLists.schema),
-        GetTodoLists.workflow)
+        GetTodoLists.workflow,
+        errorMiddleware())
     router.get('/:todoListId',
         validationMiddleware(GetTodoList.schema),
-        GetTodoList.workflow)
+        GetTodoList.workflow,
+        errorMiddleware())
     router.post('/',
         passport.authenticate('jwt-api'),
         validationMiddleware(PostTodoList.schema),
-        PostTodoList.workflow)
+        PostTodoList.workflow,
+        errorMiddleware())
     router.patch('/:todoListId',
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(PatchTodoList.schema),
-        PatchTodoList.workflow)
+        PatchTodoList.workflow,
+        errorMiddleware())
     router.delete('/:todoListId',
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(DeleteTodoList.schema),
-        DeleteTodoList.workflow)
+        DeleteTodoList.workflow,
+        errorMiddleware())
 
     return router
 }

@@ -7,6 +7,7 @@ import * as PostTodoItem from "./post.todoItem"
 import * as PatchTodoItem from "./patch.todoItem"
 import * as DeleteTodoItem from "./delete.todoItem"
 import passport from "passport";
+import errorMiddleware from "../../../../middlewares/errorMiddleware";
 
 const router = Router({mergeParams: true})
 
@@ -15,26 +16,31 @@ export default () => {
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(GetTodoItems.schema),
-        GetTodoItems.workflow)
+        GetTodoItems.workflow,
+        errorMiddleware())
     router.get('/:todoItemId',
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(GetTodoItem.schema),
-        GetTodoItem.workflow)
+        GetTodoItem.workflow,
+        errorMiddleware())
     router.post('/',
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(PostTodoItem.schema),
-        PostTodoItem.workflow)
+        PostTodoItem.workflow,
+        errorMiddleware())
     router.patch('/:todoItemId',
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(PatchTodoItem.schema),
-        PatchTodoItem.workflow)
+        PatchTodoItem.workflow,
+        errorMiddleware())
     router.delete('/:todoItemId',
         passport.authenticate('jwt-api'),
         checkListOwnershipMiddleware(),
         validationMiddleware(DeleteTodoItem.schema),
-        DeleteTodoItem.workflow)
+        DeleteTodoItem.workflow,
+        errorMiddleware())
     return router
 }
