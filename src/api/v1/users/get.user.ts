@@ -19,6 +19,7 @@ export const workflow = async (req: Request, res: Response) => {
         where: {
             id: userId
         },
+        attributes: ['id', 'username', 'email'],
         include: [{
             model: TodoList,
             include: [{
